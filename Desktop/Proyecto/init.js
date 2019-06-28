@@ -1,27 +1,30 @@
+var config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    backgroundColor: '#1b1464',
+    parent: 'phaser-example',
+    physics: {
+        default: 'matter' // esto era
+    },
+    scene: {
+        preload: preload,
+        create: create
+    }
+};
 
-
-
-const config = {
-width: 320,
-height: 180,
-parent: "container",
-type: Phaser.AUTO,
-scene: {
-
-    preload: preload,
-    create: create,
-    update: update
-}
-
-}
 var game = new Phaser.Game(config);
 
-function preload(){
-    
+function preload ()
+{
+    this.load.image('block', 'assets/sprites/block.png');
 }
-function create(){
-    
-}
-function update(){
-    
+
+function create ()
+{
+    this.matter.world.setBounds();
+
+    this.matter.add.image(400, 100, 'block', null, { chamfer: 16 });
+
+    this.matter.add.mouseSpring({ length: 1, stiffness: 0.6 });
 }
