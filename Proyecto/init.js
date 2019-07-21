@@ -24,18 +24,28 @@ function preload ()
     this.load.image('mesa','./imagenes/mesita.png');
     this.load.image('dialog','./imagenes/dialogo.png')
     this.load.image('apple','./imagenes/manzana.png');
+    this.load.image('basket','./imagenes/cesta.jpg')
+
 }
 
 function create ()
 {
+
+    this.matter.world.setBounds();//Agrega los limites al mapa
+
+
     this.fondo = this.add.image(330,175,"fondo");
-    this.fondo.setScale(1.5);   
+    this.fondo.setScale(1.5);
     animal = this.add.sprite(0, 250, 'vaca');
     mesita = this.add.image(400,450,'mesa');
-    apple = this.add.image(50,400,'apple');
+    cesta=  this.add.image(650,400,'basket');
+    cesta.setScale(0.8);
+    apple =  this.matter.add.image(50, 100, 'apple', null, { chamfer: 16 });
     apple.setScale(0.2);
-    
-    
+    this.matter.add.mouseSpring({ length: 1, stiffness: 0.6 });
+
+
+
 }
 
 
@@ -54,7 +64,7 @@ function update ()
    if(animal.x<400)
    {
     moveAnimal(animal,2);
-    
+
    }else{
     nube = this.add.image(630,100,'dialog').setAlpha(0);
      this.add.image(nube.x,nube.y-8,'apple').setScale(0.2);
@@ -68,8 +78,12 @@ function update ()
         loop: -1
 
     });
-    
-    
+
+
+   }
+
+   if(apple.x==630){
+     console.log(apple.x);
    }
 
 }
