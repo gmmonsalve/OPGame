@@ -24,7 +24,7 @@ function preload ()
     this.load.image('mesa','./imagenes/mesita.png');
     this.load.image('dialog','./imagenes/dialogo.png')
     this.load.image('apple','./imagenes/manzana.png');
-    this.load.image('basket','./imagenes/cesta.jpg')
+    this.load.image('basket','./imagenes/cesta.png')
 
 }
 
@@ -32,18 +32,18 @@ function create ()
 {
 
     this.matter.world.setBounds();//Agrega los limites al mapa
-
+    this.matter.world.updateWall(true,"bottom",0,450,800,100);
+    
 
     this.fondo = this.add.image(330,175,"fondo");
     this.fondo.setScale(1.5);
     animal = this.add.sprite(0, 250, 'vaca');
     mesita = this.add.image(400,450,'mesa');
-    cesta=  this.add.image(650,400,'basket');
-    cesta.setScale(0.8);
     apple =  this.matter.add.image(50, 100, 'apple', null, { chamfer: 16 });
     apple.setScale(0.2);
     this.matter.add.mouseSpring({ length: 1, stiffness: 0.6 });
-
+    cesta =  this.add.image(650,320,'basket');
+    cesta.setScale(0.4);
 
 
 }
@@ -68,8 +68,9 @@ function update ()
    }else{
     nube = this.add.image(630,100,'dialog').setAlpha(0);
      this.add.image(nube.x,nube.y-8,'apple').setScale(0.2);
-    nube.setScale(0.5);
-    this.tweens.add({
+        nube.setScale(0.5);
+
+        this.tweens.add({
         targets: nube,
         alphaTopLeft: { value: 1, duration: 5000, ease: 'Power1' },
         alphaBottomRight: { value: 1, duration: 10000, ease: 'Power1' },
